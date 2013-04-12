@@ -37,7 +37,8 @@ elif sys.argv[1] == "pull":
         if os.path.isdir(current_dir+item):
             if ".git" in os.listdir(current_dir+item):
                 cmd = "cd %s && git pull"%(current_dir+item)
-                print cmd
+                print "git pull %s"%(item)
+                os.system(cmd)
 
 elif sys.argv[1] == "push":
     current_dir = os.getcwd() + "/"
@@ -45,7 +46,8 @@ elif sys.argv[1] == "push":
         if os.path.isdir(current_dir+item):
             if ".git" in os.listdir(current_dir+item):
                 cmd = "cd %s && git push"%(current_dir+item)
-                print cmd
+                print "git push %s"%(item)
+                os.system(cmd)
 
 else:
     print_help()
