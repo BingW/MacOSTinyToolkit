@@ -10,17 +10,24 @@
 __docformat__ = "epytext en"
 '''
 This program do git for all git repository under current path.
-In version 0.1 it has:
 
+version 0.1:
+-------------------
 # for pull request
 bing_batchgit.py pull
 # for push request
 bing_batchgit.py push
 
 new in version 0.11
-
+-------------------
 #same as pull/push
 bing_batchgit.py start/end
+
+new in version 0.12
+-------------------
+1. push/end bug fix
+2. functionlize
+3. add batchgit status
 '''
 
 import os,sys
@@ -33,26 +40,26 @@ def print_help():
     print "To pull all repository under current path"
     print "./bing_batchgit.py pull/start\n"
 
+def batchrun_git_cmd(gitcmd):
+    current_dir = os.getcwd() + "/"
+    for item in os.listdir(current_dir):
+        if os.path.isdir(current_dir+item):
+            if ".git" in os.listdir(current_dir+item):
+                cmd = "cd %s && git %s"%(current_dir+item,gitcmd)
+                print "\ngit %s %s"%(gitcmd,item)
+                os.system(cmd)
+
 if len(sys.argv) != 2:
     print_help()
 
 elif sys.argv[1] in ["pull","start"]:
-    current_dir = os.getcwd() + "/"
-    for item in os.listdir(current_dir):
-        if os.path.isdir(current_dir+item):
-            if ".git" in os.listdir(current_dir+item):
-                cmd = "cd %s && git pull"%(current_dir+item)
-                print "git pull %s"%(item)
-                os.system(cmd)
+    batchrun_git_cmd("pull")
+    
+elif sys.argv[1] in ["push","end"]:
+    batchrun_git_cmd("push")
 
-elif sys.argv[1] == ["push","end"]:
-    current_dir = os.getcwd() + "/"
-    for item in os.listdir(current_dir):
-        if os.path.isdir(current_dir+item):
-            if ".git" in os.listdir(current_dir+item):
-                cmd = "cd %s && git push"%(current_dir+item)
-                print "git push %s"%(item)
-                os.system(cmd)
+elif sys.argv[1] in ["status"]:
+    batchrun_git_cmd("status")
 
 else:
     print_help()
