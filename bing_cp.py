@@ -1,9 +1,12 @@
 #! /usr/bin/python
-#version 0.02
+#version 0.03
 #
 '''
-This program is not mature, do not use!
+version 0.03
+won't rename original file, just create a totally "local copy" 
+of original file end with "_cp"
 '''
+
 import sys
 import os
 file_name = sys.argv[1]
