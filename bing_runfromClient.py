@@ -18,12 +18,12 @@ if len(sys.argv) == 1:
     sys.exit()
 
 cmd = " ".join(sys.argv[1:]).replace("/Volumes/hittingerlab/","~/")
+print "\n"
 print cmd
+print "\n"
 
-'''
 if raw_input("\nAre you sure to run this cmd? (y/n)\n") == "y":
     os.system(cmd)
 else:
     print "exit"
     sys.exit()
-'''
